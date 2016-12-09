@@ -15,25 +15,31 @@ target = 21
 TARGET MET
 
 '''
+import random    
+my_randoms=[]    
+for i in range (20):    
+    my_randoms.append(random.randrange(1,101,1))
+my_randoms.sort(reverse=True)
+print (my_randoms)
+    
+
 def greedy(target):
-    list1 = [1,2,3,4,9,10,11,12]
+    #list1 = [1,2,3,4,9,10,11,12]
     solution = []
     total = 0
     #target = 0
-    list1.sort(reverse=True)
-    print list1
+    #list1.sort(reverse=True)
+    #print list1
 
-    for i in list1:
-        print total
+    for i in my_randoms:
+        #print total
         if i <= target:
             target = target -i
             #total = total + i
             #target = target - total
             solution.append(i)
-            print solution
-    print sum(solution)
+            print solution, "=", sum(solution)
 
     
-greedy(13)
-
+greedy(326)
 
