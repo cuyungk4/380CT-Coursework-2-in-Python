@@ -1,9 +1,10 @@
 import random
 import copy
+import time
 
 myRandom = []    
-for i in range (20):    
-    myRandom.append(random.randrange(1,101,1))
+for i in range (150):    
+    myRandom.append(random.randrange(1,3501,1))
 myRandom.sort(reverse=True)
 print (myRandom)
     
@@ -63,4 +64,6 @@ def iterativeImprov(target):
 
 greedy(623)
 print "-----------------------"
+startT = time.time()
 print iterativeImprov(623)
+print "%s seconds" % (time.time() - startT)
