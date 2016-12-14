@@ -38,7 +38,15 @@ class subsetSum
 				}
 			}
 		}
-
+		
+		//print the table
+		for(int i = 0; i <= sum; i++)
+		{
+			for(int j = 0; j <= length; j++)
+				System.out.println(subset[i][j]);
+			System.out.println("\n");
+		}
+		
 		return subset[sum][length];
 	}
 
@@ -47,9 +55,15 @@ class subsetSum
 		int set[] = {3, 34, 4, 12, 5, 2};
 		int sum = 9;
 		int length = set.length;
+                long startT = System.nanoTime();
 		if (subsetTest(set, length, sum) == true)
 			System.out.println("Found a subset with given sum");
 		else
 			System.out.println("No subset with given sum");
+                long endT = System.nanoTime();
+                //for conversion
+                long nanToSec = 100000000;
+                long duration = (endT - startT)/ nanToSec;
+                System.out.println(duration + " seconds");
 	}
 }
