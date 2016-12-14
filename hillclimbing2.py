@@ -55,7 +55,7 @@ def iterativeImprov(target):
             print "New solution: ", newSolution, "=", sum(newSolution)
             print "Discarding new solution -----------------------------"
             newSolution = copy.copy(solution)
-            print "Solution: ", newSolution, "=", sum(newSolution)
+            #print "Solution: ", newSolution, "=", sum(newSolution)
             #decrement counter
             iteration -= 1
 
