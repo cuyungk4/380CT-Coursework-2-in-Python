@@ -1,12 +1,24 @@
 import random
+from random import randint
+import time
+
+#smallest number in the list
+minimum = 1
+#largest number in the list
+maximum = 101
+#size of the list
+listSize = 20
+#randomising target
+target = randint(minimum, maximum)
 
 #create a ramdom array 
 def create():
       s=[]    
-      for i in range (20):    
-          s.append(random.randrange(1,101,1))
+      for i in range (listSize):    
+          s.append(random.randrange(minimum,maximum,1))
       s.sort(reverse=True)
       return s
+    
 #greedy algorithm
 def greedy(target,list1):
       greedy_solution = []
@@ -122,9 +134,11 @@ def grasp(target, greedy_solution, RCL, Max_Iterations):
 #s = [26, 24, 20, 19, 17]
 #s = [7,8,2,5,6,4,9,13]
 #s.sort(reverse=True)
-t = 377
+t = target
 s = create()
 G = greedy(t,s)
 R = RCL(s, G)
-grasp(t, G, R, 150)
 
+startT = time.time()
+grasp(t, G, R, 150)
+print "%s seconds" % (time.time() - startT)
