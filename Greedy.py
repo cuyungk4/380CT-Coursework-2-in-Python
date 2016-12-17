@@ -15,13 +15,23 @@ target = 21
 TARGET MET
 
 '''
-import random    
-my_randoms=[]    
-for i in range (20):    
-    my_randoms.append(random.randrange(1,101,1))
-my_randoms.sort(reverse=True)
-print (my_randoms)
-    
+import random
+from random import randint
+import time
+
+myRandom = []
+#smallest number in the list
+minimum = 1
+#largest number in the list
+maximum = 101
+#size of the list
+listSize = 20
+for i in range (listSize):    
+    myRandom.append(random.randrange(minimum,maximum,1))
+myRandom.sort(reverse=True)
+print (myRandom)
+
+target = randint(minimum, maximum)
 
 def greedy(target):
     #list1 = [1,2,3,4,9,10,11,12]
@@ -31,7 +41,7 @@ def greedy(target):
     #list1.sort(reverse=True)
     #print list1
 
-    for i in my_randoms:
+    for i in myRandom:
         #print total
         if i <= target:
             target = target -i
@@ -40,6 +50,7 @@ def greedy(target):
             solution.append(i)
             print solution, "=", sum(solution)
 
-    
-greedy(326)
-
+print "target: ", target
+startT = time.time()
+greedy(target)
+print "%s seconds" % (time.time() - startT)
