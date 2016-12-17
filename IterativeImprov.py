@@ -16,6 +16,7 @@ myRandom.sort(reverse=True)
 print (myRandom)
     
 solution = []
+#randomising target
 target = randint(minimum, maximum)
 
 def greedy(target):
@@ -34,10 +35,11 @@ def greedy(target):
 
 def iterativeImprov(target):
     iteration = 100
+    counter = 0
     target = target
     global solution
     newSolution = copy.copy(solution)
-    while iteration != 0:
+    while counter != iteration:
         #pick a random number in solution and replace it with a
         #random number in myRandom
         index = solution.index(random.choice(solution))
@@ -59,7 +61,7 @@ def iterativeImprov(target):
             print "New solution: ", solution, "=", sum(solution)
             print "Keeping new solution -----------------------------"
             #decrement counter
-            iteration -= 1
+            counter += 1
         #else if old solution difference is smaller than new solution difference
         elif oldSolDiff < newSolDiff:
             print "New solution: ", newSolution, "=", sum(newSolution)
@@ -67,9 +69,9 @@ def iterativeImprov(target):
             newSolution = copy.copy(solution)
             #print "Solution: ", newSolution, "=", sum(newSolution)
             #decrement counter
-            iteration -= 1
+            counter += 1
 
-    return newSolution, "=" ,sum(newSolution)
+    return newSolution, "=" ,sum(newSolution), "iteration: ", counter
 
 print "target: ", target
 greedy(target)
