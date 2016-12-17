@@ -11,6 +11,7 @@
  */
 import java.util.Arrays;
 import java.util.Random;
+import java.lang.*;
 
 class DynamicSubsetSum
 {
@@ -60,11 +61,15 @@ class DynamicSubsetSum
                 Random r = new Random();
                 int[] set = new int[10];
                 int length = set.length;
-                int min = 1;
-                int max = 10;
+                 
+                double min = 0;
+                double max = 2;
+                //maxbitlength, 2^max - 1
+                //the larger the numbers the array stores, the more memory they take
+                double maxBitLength = Math.pow(2.0,max) - 1;
                 for (int i=0; i < length; i++)
                 {
-                    set[i] = r.nextInt(max - min + 1) + min;
+                    set[i] = (int) (r.nextInt((int) (maxBitLength - min + 1)) + min);
                 }
                 System.out.println("Array: " + Arrays.toString(set));
 		//int set[] = {3, 34, 4, 12, 5, 2};
