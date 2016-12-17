@@ -63,7 +63,7 @@ class DynamicSubsetSum
                 int length = set.length;
                  
                 double min = 0;
-                double max = 2;
+                double max = 5;
                 //maxbitlength, 2^max - 1
                 //the larger the numbers the array stores, the more memory they take
                 double maxBitLength = Math.pow(2.0,max) - 1;
@@ -73,10 +73,11 @@ class DynamicSubsetSum
                 }
                 System.out.println("Array: " + Arrays.toString(set));
 		//int set[] = {3, 34, 4, 12, 5, 2};
-		int sum = 12;
+                //pick a random target from 0 to length x maxBitLength
+		double sum = r.nextInt((int) (((length * maxBitLength) - min + 1) + min));
 		
                 long startT = System.nanoTime();
-		if (subsetTest(set, length, sum) == true)
+		if (subsetTest(set, length, (int) sum) == true)
 			System.out.println("Found a subset with given sum: " + sum);
 		else
 			System.out.println("No subset with given sum: " + sum);
