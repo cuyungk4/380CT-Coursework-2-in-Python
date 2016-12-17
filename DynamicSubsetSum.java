@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,6 +9,7 @@
  *
  * @author user
  */
+import java.util.Arrays;
 import java.util.Random;
 
 class DynamicSubsetSum
@@ -48,12 +44,12 @@ class DynamicSubsetSum
 		}
 		
 		//print the table
-		for(int i = 0; i <= sum; i++)
+		/*for(int i = 0; i <= sum; i++)
 		{
 			for(int j = 0; j <= length; j++)
 				System.out.println(subset[i][j]);
 			System.out.println("\n");
-		}
+		}*/
 		
 		return subset[sum][length];
 	}
@@ -70,20 +66,17 @@ class DynamicSubsetSum
                 {
                     set[i] = r.nextInt(max - min + 1) + min;
                 }
-            // end of what was changed 
-                System.out.println("Array: " + set);
+                System.out.println("Array: " + Arrays.toString(set));
 		//int set[] = {3, 34, 4, 12, 5, 2};
-		int sum = 1;
+		int sum = 12;
 		
                 long startT = System.nanoTime();
 		if (subsetTest(set, length, sum) == true)
-			System.out.println("Found a subset with given sum");
+			System.out.println("Found a subset with given sum: " + sum);
 		else
-			System.out.println("No subset with given sum");
+			System.out.println("No subset with given sum: " + sum);
                 long endT = System.nanoTime();
-                //for conversion
-                long nanToSec = 100000000;
-                long duration = (endT - startT)/ nanToSec;
-                System.out.println(duration + " seconds");
+                long duration = (endT - startT);
+                System.out.println(duration + " nanoseconds");
 	}
 }
