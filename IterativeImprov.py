@@ -1,14 +1,22 @@
 import random
+from random import randint
 import copy
 import time
 
-myRandom = []    
-for i in range (150):    
-    myRandom.append(random.randrange(1,3501,1))
+myRandom = []
+#smallest number in the list
+minimum = 1
+#largest number in the list
+maximum = 3501
+#size of the list
+listSize = 150
+for i in range (listSize):    
+    myRandom.append(random.randrange(minimum,maximum,1))
 myRandom.sort(reverse=True)
 print (myRandom)
     
 solution = []
+target = randint(minimum, maximum)
 
 def greedy(target):
     #solution = []
@@ -21,6 +29,7 @@ def greedy(target):
             solution.append(i)
             print solution, "=", sum(solution)
     return solution 
+
 
 
 def iterativeImprov(target):
@@ -62,8 +71,10 @@ def iterativeImprov(target):
 
     return newSolution, "=" ,sum(newSolution)
 
-greedy(623)
+print "target: ", target
+greedy(target)
 print "-----------------------"
+
 startT = time.time()
-print iterativeImprov(623)
+print iterativeImprov(target)
 print "%s seconds" % (time.time() - startT)
