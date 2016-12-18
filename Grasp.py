@@ -11,13 +11,13 @@ def create(n, max_n):
       target = random.randrange(max_n) 
       # return the array and the target
       return stack, target
-
+######## not working #########
 def SpCase (array , target):
       for a in array:
             if a >= target:
                   array.remove(a)
       return array
-
+######## not working #########
 #greedy algorithm
 def greedy(target,array):
       greedy_solution = []
