@@ -9,6 +9,7 @@ def create(n, max_n):
           stack.append(random.randrange(1,max_n,1))
       stack.sort(reverse=True)
       target = random.randrange(max_n) 
+      # return the array and the target
       return stack, target
 #greedy algorithm
 def greedy(target,array):
@@ -166,7 +167,9 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
 #t = 377
             
 c = create(20,101)
+# array is the first element of the return value
 s = c[0]
+# target is the srcond element of the return value
 t = c[1]
 G = greedy(t,s)
 R = RCL(s, G)
