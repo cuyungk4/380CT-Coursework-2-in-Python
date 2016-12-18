@@ -11,6 +11,13 @@ def create(n, max_n):
       target = random.randrange(max_n) 
       # return the array and the target
       return stack, target
+
+def SpCase (array , target):
+      for a in array:
+            if a >= target:
+                  array.remove(a)
+      return array
+
 #greedy algorithm
 def greedy(target,array):
       greedy_solution = []
@@ -21,7 +28,12 @@ def greedy(target,array):
                   target = target - i
                   greedy_solution.append(i)
                   #print "Greedy", greedy_solution, "=", sum(greedy_solution)
+
+      if len(greedy_solution) == 0:
+            greedy_solution.append(array[-1])
       print "Greedy", greedy_solution, "=", sum(greedy_solution)
+
+            
       return greedy_solution
 
 #create RCL(Random Candidate List)
@@ -47,14 +59,13 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
       maxt = Max_Iterations
       best = []
       new = []
-      #ndiff = abs(t - sum(new))
-      #bdiff = abs(t - sum(best)) 
       #print "Solution: ", solution
       #print "Gsolution: ",Gsolution
       print "RCL" , RCL
       print "Target: ",target
       Gdiff = abs(t - sum(Gsolution))
       Sdiff = 0
+      noc = 0
 
       
       while sum(solution) != target:
@@ -77,7 +88,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   '''
             #print "\nSlist", slist
             #While total of solution is smaller than the target it will randomly select one more from RCL
-            while sum(solution) < t:
+            while sum(solution) < t :
             #if sum(solution) < t:
                   if len(slist) <= 0:
                         #print "There are no substring can be sum up to %s"%target
@@ -91,7 +102,10 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   #print "solsutiona" , solution
                   iteration += 1
                   print "Solution: %s = %s"%(solution,sum(solution))
-
+                  
+                  if iteration == maxt:
+                        print "Over %s time of iteration, so we assume: " %iteration
+                        break
 
             while sum(solution)> t:
             #if sum(solution)> t:
@@ -107,7 +121,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   iteration += 1
                   print "Solution: %s = %s"%(solution,sum(solution))
                   #print "\t\t\t\t\t\t\tnot match"
-
+                  
             #print "Final Solution: %s = %s"%(solution,sum(solution))
 
             
@@ -121,13 +135,16 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
             #if the new solution is have a smaller different between target, it will replace the best solution
             if ndiff<bdiff:
                   best = list(new)
+                  noc = 0
             elif ndiff>bdiff:
                   best = list(best)
+                  noc += 1
             elif ndiff == 0:
                   best = list(new)
+                  noc = 0
             else:
                   best = list(new)
-
+                  noc = 0
 
             if sum(best) == t:
                   print"done"
@@ -137,10 +154,22 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   print "There are no substring can be sum up to %s"%target
                   break
             
+            elif array[-1]> target:
+                  print "There are no substring can be sum up to %s"%target
+                  break
+            elif noc == (maxt*0.1):
+                  print "%s have been teh best solution for %s time"%(best,noc)
+                  print "There are no substring can be sum up to %s"%target
+                  solution = best
+                  break
+
             if iteration == maxt:
                   print "Over %s time of iteration, so we assume: " %iteration
                   break
 
+            #print "Time",iteration
+
+            
       Sdiff = abs(sum(solution) - t)
       #print sorted(Gsolution+RCL),"\nThe list is above"
       print "\nThe given array :\n%s"%array
@@ -157,7 +186,8 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
       elif Gdiff> Sdiff:
             diff = Sdiff
             print "The best solution is GRASP which the sum is %s = %s" %(solution, sum(solution))
-      elif Sdiff > Gdiff:
+      #elif Sdiff > Gdiff:
+      else:
             diff = Gdiff
             print "The best solution is: Greedy which the sum is %s = %s " %(Gsolution, sum(Gsolution))
 
@@ -171,9 +201,9 @@ c = create(20,101)
 s = c[0]
 # target is the srcond element of the return value
 t = c[1]
+#s = SpCase(s,t)
 G = greedy(t,s)
 R = RCL(s, G)
 Tstart = time.time()
 grasp(t, G, R, s, 500)
 print "The algorithm finish in %s seconds."%(time.time() - Tstart)
-
