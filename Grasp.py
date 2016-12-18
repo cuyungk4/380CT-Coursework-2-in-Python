@@ -4,13 +4,15 @@ import time
 #create a ramdom array 
 def create(n, max_n):
       stack =[]
-      # n is the ammount of element
+      # n is the amount of element
       for i in range (n):    
           stack.append(random.randrange(1,max_n,1))
       stack.sort(reverse=True)
+      #create a random number for target
       target = random.randrange(max_n) 
       # return the array and the target
       return stack, target
+
 ######## not working #########
 def SpCase (array , target):
       for a in array:
@@ -18,6 +20,7 @@ def SpCase (array , target):
                   array.remove(a)
       return array
 ######## not working #########
+
 #greedy algorithm
 def greedy(target,array):
       greedy_solution = []
@@ -29,8 +32,9 @@ def greedy(target,array):
                   greedy_solution.append(i)
                   #print "Greedy", greedy_solution, "=", sum(greedy_solution)
 
+      #If there no element in greedy soution.
       if len(greedy_solution) == 0:
-            greedy_solution.append(array[-1])
+            print "Greedy can be appply, because the target is too small"
       print "Greedy", greedy_solution, "=", sum(greedy_solution)
 
             
@@ -128,7 +132,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
             #different between targe and new/best solution
             new = list(solution)
             ndiff = abs(t - sum(new))
-            print "New ",new, " " , ndiff
+            #print "New ",new, " " , ndiff
             bdiff = abs(t - sum(best))
             print "Best ",best, " " , bdiff
 
@@ -149,22 +153,23 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
             if sum(best) == t:
                   print"done"
                   break
-            
-            elif len(slist) <= 0:
+
+            #when there are no element in the array or the whole array can not be sum up to the target, it will break the while loop
+            elif len(slist) <= 0 or array[-1]> target:
                   print "There are no substring can be sum up to %s"%target
                   break
-            
-            elif array[-1]> target:
-                  print "There are no substring can be sum up to %s"%target
-                  break
+
+            #when the best soltuion have not been update for for some time, it will break the while loop
             elif noc == (maxt*0.1):
-                  print "%s have been teh best solution for %s time"%(best,noc)
+                  print "%s have been the best solution for %s time"%(best,noc)
                   print "There are no substring can be sum up to %s"%target
+                  print "so we assume: "
                   solution = best
                   break
 
-            if iteration == maxt:
+            elif iteration == maxt:
                   print "Over %s time of iteration, so we assume: " %iteration
+                  solution = best
                   break
 
             #print "Time",iteration
