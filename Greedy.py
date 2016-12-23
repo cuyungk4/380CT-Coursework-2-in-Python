@@ -35,8 +35,28 @@ def greedy(target):
       if len(solution) == 0:
             print "Greedy can be appply, because the target is too small"
 
-print "target: ", target
-startT = time.time()
-greedy(target)
-print "%s seconds" % (time.time() - startT)
+####test variables####
+#length of test; run the test ___ times
+lenTest = 5
+#list containng test execution time results
+arrTest = [0] * lenTest
+#average variable
+avgTest = 0
+#sum of list
+sumTest = 0
+####test variables####
 
+#test loop
+for i in range(0, lenTest, 1):
+    print "target: ", target
+    startT = time.time()
+    greedy(target)
+    #print "%s seconds" % (time.time() - startT)
+    arrTest[i] = time.time() - startT
+
+#summing of results
+sumTest = sum(arrTest)
+#averaging the results
+avgTest = sumTest / lenTest
+print "Average time to complete ", lenTest, " algorithm runs: ", avgTest, " seconds"
+#print arrTest
