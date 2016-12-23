@@ -200,15 +200,38 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
 #s = [7,8,2,5,6,4,9,13]
 #s.sort(reverse=True)
 #t = 377
-            
-c = create(20,101)
-# array is the first element of the return value
-s = c[0]
-# target is the srcond element of the return value
-t = c[1]
-#s = SpCase(s,t)
-G = greedy(t,s)
-R = RCL(s, G)
-Tstart = time.time()
-grasp(t, G, R, s, 500)
-print "The algorithm finish in %s seconds."%(time.time() - Tstart)
+
+####test variables####
+#length of test; run the test ___ times
+lenTest = 5
+#list containng test execution time results
+arrTest = [0] * lenTest
+#average variable
+avgTest = 0
+#sum of list
+sumTest = 0
+####test variables####
+
+#test loop
+for i in range(0, lenTest, 1):
+    #create(list length, element max size
+    c = create(20,101)
+    # array is the first element of the return value
+    s = c[0]
+    # target is the srcond element of the return value
+    t = c[1]
+    #s = SpCase(s,t)
+    G = greedy(t,s)
+    R = RCL(s, G)
+    Tstart = time.time()
+    #number of iterations (t, G, R, s, num)
+    grasp(t, G, R, s, 500)
+    #print "The algorithm finish in %s seconds."%(time.time() - Tstart)
+    arrTest[i] = time.time() - Tstart
+
+#summing of results
+sumTest = sum(arrTest)
+#averaging the results
+avgTest = sumTest / lenTest
+print "Average time to complete ", lenTest, " algorithm runs: ", avgTest, " seconds"
+#print arrTest
