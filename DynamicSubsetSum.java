@@ -11,7 +11,6 @@
  */
 import java.util.Arrays;
 import java.util.Random;
-import java.lang.*;
 
 class DynamicSubsetSum
 {
@@ -57,32 +56,55 @@ class DynamicSubsetSum
 
 	public static void main(String args[])
 	{
-            // add code from Friday to fix dynamic by applying bitlength 
+             
                 Random r = new Random();
                 int[] set = new int[10];
                 int length = set.length;
                  
                 double min = 0;
-                double max = 5;
+                double maxBit = 4;
                 //maxbitlength, 2^max - 1
                 //the larger the numbers the array stores, the more memory they take
-                double maxBitLength = Math.pow(2.0,max) - 1;
+                double maxBitLength = Math.pow(2.0,maxBit) - 1;
                 for (int i=0; i < length; i++)
                 {
                     set[i] = (int) (r.nextInt((int) (maxBitLength - min + 1)) + min);
                 }
                 System.out.println("Array: " + Arrays.toString(set));
-		//int set[] = {3, 34, 4, 12, 5, 2};
                 //pick a random target from 0 to length x maxBitLength
 		double sum = r.nextInt((int) (((length * maxBitLength) - min + 1) + min));
 		
-                long startT = System.nanoTime();
-		if (subsetTest(set, length, (int) sum) == true)
-			System.out.println("Found a subset with given sum: " + sum);
-		else
-			System.out.println("No subset with given sum: " + sum);
-                long endT = System.nanoTime();
-                long duration = (endT - startT);
-                System.out.println(duration + " nanoseconds");
+                //length of test; run the test ___ times
+                int lenTest = 100;
+                //array containing test execution time results
+                long[] arrTest = new long[lenTest];
+                //average variable
+                long avgTest = 0;
+                //sum of array
+                long sumTest = 0;
+                
+                //test loop
+                for (int i = 0; i < lenTest; i++)
+                {
+                    long startT = System.nanoTime();
+                    if (subsetTest(set, length, (int) sum) == true)
+                        System.out.println("Found a subset with given sum: " + sum);
+                    else
+                        System.out.println("No subset with given sum: " + sum);
+                    long endT = System.nanoTime();
+                    long duration = (endT - startT);
+                    //System.out.println(duration + " nanoseconds");
+                    arrTest[i] = duration;
+                }
+                
+                //sum loop
+                for (long num : arrTest)
+                {
+                    sumTest = sumTest + num;
+                }
+                
+                //averaging the results
+                avgTest = sumTest / lenTest;
+                System.out.println("Average time to complete " + lenTest + " algorithm runs: " + avgTest + " nanoseconds");
 	}
 }
