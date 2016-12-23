@@ -13,14 +13,14 @@ public class Exhaustive {
 		//int[] arr = { 10, 34, 19, 27 };
                 Random r = new Random();
                 //change length here ↓
-                int[] set = new int[10];
+                int[] set = new int[5];
                 int length = set.length;
                 
                 //smallest element in the array
-                int min = 1;
+                int min = 0;
                 //largest element in the array
-                int max = 10;
-                
+                int max = 1000;
+                //populating the set array
                 for (int i=0; i < length; i++)
                 {
                     set[i] = (int) (r.nextInt(max - min + 1) + min);
@@ -30,11 +30,35 @@ public class Exhaustive {
 		int sum = r.nextInt(max - min + 1) + min;
                 System.out.println("Target: " + sum);
                 
-                long startT = System.nanoTime();
-		findSubsets(set, 0, sum, new Stack<Integer>());
-                long endT = System.nanoTime();
-                long duration = (endT - startT);
-                System.out.println(duration + " nanoseconds");
+                //length of test; run the test ___ times
+                int lenTest = 100;
+                //array containing test execution time results
+                long[] arrTest = new long[lenTest];
+                //average variable
+                long avgTest = 0;
+                //sum of array
+                long sumTest = 0;
+                
+                //test loop
+                for (int i = 0; i < lenTest; i++)
+                {
+                    long startT = System.nanoTime();
+                    findSubsets(set, 0, sum, new Stack<Integer>());
+                    long endT = System.nanoTime();
+                    long duration = (endT - startT);
+                    //System.out.println(duration + " nanoseconds");
+                    arrTest[i] = duration;
+                }
+                
+                //sum loop
+                for (long num : arrTest)
+                {
+                    sumTest = sumTest + num;
+                }
+
+                //averaging the results
+                avgTest = sumTest / lenTest;
+                System.out.println("Average time to complete " + lenTest + " algorithm runs: " + avgTest + " nanoseconds");
 	}
 
 	private static void findSubsets(int[] arr, int start, int target, Stack<Integer> s) {
