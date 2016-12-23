@@ -77,6 +77,31 @@ print "target: ", target
 greedy(target)
 print "-----------------------"
 
-startT = time.time()
+####test variables####
+#length of test; run the test ___ times
+lenTest = 5
+#list containng test execution time results
+arrTest = [0] * lenTest
+#average variable
+avgTest = 0
+#sum of list
+sumTest = 0
+####test variables####
+
+#test loop
+for i in range(0, lenTest, 1):
+    startT = time.time()
+    print iterativeImprov(target)
+    #print "%s seconds" % (time.time() - startT)
+    arrTest[i] = time.time() - startT
+
+#summing of results
+sumTest = sum(arrTest)
+#averaging the results
+avgTest = sumTest / lenTest
+print "Average time to complete ", lenTest, " algorithm runs: ", avgTest, " seconds"
+#print arrTest
+
+'''startT = time.time()
 print iterativeImprov(target)
-print "%s seconds" % (time.time() - startT)
+print "%s seconds" % (time.time() - startT)'''
