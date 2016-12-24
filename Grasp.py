@@ -214,6 +214,7 @@ sumTest = 0
 
 #test loop
 for i in range(0, lenTest, 1):
+    print "Test No.",i
     #create(list length, element max size
     c = create(20, 1, 101)
     # array is the first element of the return value
