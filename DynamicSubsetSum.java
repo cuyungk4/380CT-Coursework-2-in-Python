@@ -57,7 +57,7 @@ class DynamicSubsetSum
 	public static void main(String args[])
 	{
              
-                Random r = new Random();
+                /*Random r = new Random();
                 int[] set = new int[10];
                 int length = set.length;
                  
@@ -72,10 +72,10 @@ class DynamicSubsetSum
                 }
                 System.out.println("Array: " + Arrays.toString(set));
                 //pick a random target from 0 to length x maxBitLength
-		double sum = r.nextInt((int) (((length * maxBitLength) - min + 1) + min));
+		double sum = r.nextInt((int) (((length * maxBitLength) - min + 1) + min));*/
 		
                 //length of test; run the test ___ times
-                int lenTest = 100;
+                int lenTest = 5;
                 //array containing test execution time results
                 long[] arrTest = new long[lenTest];
                 //average variable
@@ -86,6 +86,23 @@ class DynamicSubsetSum
                 //test loop
                 for (int i = 0; i < lenTest; i++)
                 {
+                    Random r = new Random();
+                    int[] set = new int[10];
+                    int length = set.length;
+
+                    double min = 0;
+                    double maxBit = 4;
+                    //maxbitlength, 2^max - 1
+                    //the larger the numbers the array stores, the more memory they take
+                    double maxBitLength = Math.pow(2.0,maxBit) - 1;
+                    for (int j=0; j < length; j++)
+                    {
+                        set[j] = (int) (r.nextInt((int) (maxBitLength - min + 1)) + min);
+                    }
+                    System.out.println("Array: " + Arrays.toString(set));
+                    //pick a random target from 0 to length x maxBitLength
+                    double sum = r.nextInt((int) (((length * maxBitLength) - min + 1) + min));
+                    
                     long startT = System.nanoTime();
                     if (subsetTest(set, length, (int) sum) == true)
                         System.out.println("Found a subset with given sum: " + sum);

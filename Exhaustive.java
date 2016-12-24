@@ -9,29 +9,9 @@ import java.util.Random;
 public class Exhaustive {
 
 	public static void main(String[] args) {
-
-		//int[] arr = { 10, 34, 19, 27 };
-                Random r = new Random();
-                //change length here ↓
-                int[] set = new int[5];
-                int length = set.length;
-                
-                //smallest element in the array
-                int min = 0;
-                //largest element in the array
-                int max = 1000;
-                //populating the set array
-                for (int i=0; i < length; i++)
-                {
-                    set[i] = (int) (r.nextInt(max - min + 1) + min);
-                }
-                System.out.println("Array: " + Arrays.toString(set));
-                //randomly generate target in range of min to max
-		int sum = r.nextInt(max - min + 1) + min;
-                System.out.println("Target: " + sum);
                 
                 //length of test; run the test ___ times
-                int lenTest = 100;
+                int lenTest = 5;
                 //array containing test execution time results
                 long[] arrTest = new long[lenTest];
                 //average variable
@@ -42,6 +22,25 @@ public class Exhaustive {
                 //test loop
                 for (int i = 0; i < lenTest; i++)
                 {
+                    Random r = new Random();
+                    //change length here ↓
+                    int[] set = new int[5];
+                    int length = set.length;
+
+                    //smallest element in the array
+                    int min = 0;
+                    //largest element in the array
+                    int max = 10;
+                    //populating the set array
+                    for (int j=0; j < length; j++)
+                    {
+                        set[j] = (int) (r.nextInt(max - min + 1) + min);
+                    }
+                    System.out.println("Array: " + Arrays.toString(set));
+                    //randomly generate target in range of min to max
+                    int sum = r.nextInt(max - min + 1) + min;
+                    System.out.println("Target: " + sum);
+
                     long startT = System.nanoTime();
                     findSubsets(set, 0, sum, new Stack<Integer>());
                     long endT = System.nanoTime();
@@ -59,7 +58,8 @@ public class Exhaustive {
                 //averaging the results
                 avgTest = sumTest / lenTest;
                 System.out.println("Average time to complete " + lenTest + " algorithm runs: " + avgTest + " nanoseconds");
-	}
+                //System.out.println(Arrays.toString(arrTest));
+        }
 
 	private static void findSubsets(int[] arr, int start, int target, Stack<Integer> s) {
 
