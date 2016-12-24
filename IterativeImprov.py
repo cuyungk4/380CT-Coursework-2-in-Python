@@ -3,22 +3,6 @@ from random import randint
 import copy
 import time
 
-myRandom = []
-#smallest number in the list
-minimum = 1
-#largest number in the list
-maximum = 3501
-#size of the list
-listSize = 150
-for i in range (listSize):    
-    myRandom.append(random.randrange(minimum,maximum,1))
-myRandom.sort(reverse=True)
-print (myRandom)
-    
-solution = []
-#randomising target
-target = randint(minimum, maximum)
-
 def greedy(target):
     #solution = []
     total = 0
@@ -39,7 +23,7 @@ def iterativeImprov(target):
     target = target
     global solution
     newSolution = copy.copy(solution)
-    while counter != iteration:
+    while solution != target:
         #pick a random number in solution and replace it with a
         #random number in myRandom
         index = solution.index(random.choice(solution))
@@ -54,6 +38,9 @@ def iterativeImprov(target):
         #if target is met
         if target == sum(solution):
             return "Target met", solution ,"=", sum(solution)
+        elif counter == iteration:
+            print "Reached %s iterations, stopping execution" %iteration
+            break
         #else if new solution difference is smaller than old solution difference
         elif newSolDiff < oldSolDiff:
             #replace old solution with new solution
@@ -73,13 +60,11 @@ def iterativeImprov(target):
 
     return newSolution, "=" ,sum(newSolution), "iteration: ", counter
 
-print "target: ", target
-greedy(target)
-print "-----------------------"
+
 
 ####test variables####
 #length of test; run the test ___ times
-lenTest = 5
+lenTest = 10
 #list containng test execution time results
 arrTest = [0] * lenTest
 #average variable
@@ -90,6 +75,26 @@ sumTest = 0
 
 #test loop
 for i in range(0, lenTest, 1):
+    myRandom = []
+    #smallest number in the list
+    minimum = 1
+    #largest number in the list
+    maximum = 10
+    #size of the list
+    listSize = 10
+    for i in range (listSize):    
+        myRandom.append(random.randrange(minimum,maximum,1))
+    myRandom.sort(reverse=True)
+    print (myRandom)
+        
+    solution = []
+    #randomising target
+    target = randint(minimum, maximum)
+
+    print "target: ", target
+    greedy(target)
+    print "-----------------------"
+    
     startT = time.time()
     print iterativeImprov(target)
     #print "%s seconds" % (time.time() - startT)
