@@ -2,14 +2,14 @@ import random
 import time
 
 #create a ramdom array 
-def create(n, max_n):
+def create(n, min_d, max_d):
       stack =[]
       # n is the amount of element
       for i in range (n):    
-          stack.append(random.randrange(1,max_n,1))
+          stack.append(random.randrange(min_d,max_d,1))
       stack.sort(reverse=True)
       #create a random number for target
-      target = random.randrange(max_n) 
+      target = random.randrange(max_d*(len(str(max_d)))) 
       # return the array and the target
       return stack, target
 
@@ -215,7 +215,7 @@ sumTest = 0
 #test loop
 for i in range(0, lenTest, 1):
     #create(list length, element max size
-    c = create(20,101)
+    c = create(20, 1, 101)
     # array is the first element of the return value
     s = c[0]
     # target is the srcond element of the return value
