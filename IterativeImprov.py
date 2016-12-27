@@ -18,12 +18,16 @@ def greedy(target):
 
 
 def iterativeImprov(target):
-    iteration = 100
+    iteration = 10
     counter = 0
     target = target
     global solution
     newSolution = copy.copy(solution)
     while solution != target:
+        #if list is empty, stop
+        if not solution:
+            print "empty list"
+            break
         #pick a random number in solution and replace it with a
         #random number in myRandom
         index = solution.index(random.choice(solution))
@@ -38,6 +42,7 @@ def iterativeImprov(target):
         #if target is met
         if target == sum(solution):
             return "Target met", solution ,"=", sum(solution)
+        
         elif counter == iteration:
             print "Reached %s iterations, stopping execution" %iteration
             break
@@ -64,7 +69,7 @@ def iterativeImprov(target):
 
 ####test variables####
 #length of test; run the test ___ times
-lenTest = 10
+lenTest = 100
 #list containng test execution time results
 arrTest = [0] * lenTest
 #average variable
