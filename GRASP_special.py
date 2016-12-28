@@ -9,8 +9,7 @@ def create(n, min_d, max_d):
           stack.append(random.randrange(min_d,max_d,1))
       stack.sort(reverse=True)
       #create a random number for target
-      #target = random.randrange(max_d*(len(str(max_d))))
-      target = 3000
+      target = random.randrange(sum(range(1,max_d,1))/n)
       print "Ostack: ",stack
       print " target: " ,target
       stack = SpCase(stack,target)
