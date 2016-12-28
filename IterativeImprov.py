@@ -18,7 +18,7 @@ def greedy(target):
 
 
 def iterativeImprov(target):
-    iteration = 10
+    iteration = 100
     counter = 0
     target = target
     global solution
@@ -79,14 +79,14 @@ sumTest = 0
 ####test variables####
 
 #test loop
-for i in range(0, lenTest, 1):
+for j in range(0, lenTest, 1):
     myRandom = []
     #smallest number in the list
     minimum = 0
     #largest number in the list
     maximum = 1000
     #size of the list
-    listSize = 10
+    listSize = 100
     for i in range (listSize):    
         myRandom.append(random.randrange(minimum,maximum,1))
     myRandom.sort(reverse=True)
@@ -103,7 +103,7 @@ for i in range(0, lenTest, 1):
     startT = time.time()
     print iterativeImprov(target)
     #print "%s seconds" % (time.time() - startT)
-    arrTest[i] = time.time() - startT
+    arrTest[j] = time.time() - startT
 
 #summing of results
 sumTest = sum(arrTest)
