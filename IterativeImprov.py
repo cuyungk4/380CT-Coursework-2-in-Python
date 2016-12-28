@@ -46,8 +46,8 @@ def iterativeImprov(target):
         elif counter == iteration:
             print "Reached %s iterations, stopping execution" %iteration
             break
-        #else if new solution difference is smaller than old solution difference
-        elif newSolDiff < oldSolDiff:
+        #else if new solution difference is smaller or equal than old solution difference
+        elif newSolDiff <= oldSolDiff:
             #replace old solution with new solution
             solution = newSolution
             print "New solution: ", solution, "=", sum(solution)
@@ -82,9 +82,9 @@ sumTest = 0
 for i in range(0, lenTest, 1):
     myRandom = []
     #smallest number in the list
-    minimum = 1
+    minimum = 0
     #largest number in the list
-    maximum = 10
+    maximum = 1000
     #size of the list
     listSize = 10
     for i in range (listSize):    
