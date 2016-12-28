@@ -9,8 +9,8 @@ def create(n, min_d, max_d):
           stack.append(random.randrange(min_d,max_d,1))
       stack.sort(reverse=True)
       #create a random number for target
-      target = random.randrange(max_d*(len(str(max_d))))
-      #target = 50
+      #target = random.randrange(max_d*(len(str(max_d))))
+      target = 3000
       print "Ostack: ",stack
       print " target: " ,target
       stack = SpCase(stack,target)
@@ -22,8 +22,7 @@ def create(n, min_d, max_d):
 def SpCase (array , target):
       narray = []
       for a in array:
-            print a
-            if a < target:
+            if a <= target:
                   narray.append(a)
       return narray
 #####special Case########
@@ -41,7 +40,7 @@ def greedy(target,array):
 
       #If there no element in greedy soution.
       if len(greedy_solution) == 0:
-            print "Greedy can be appply, because the target is too small"
+            print "Greedy can not be applied, because the target is too small"
       print "Greedy", greedy_solution, "=", sum(greedy_solution)
 
             
@@ -220,7 +219,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
 
 ####test variables####
 #length of test; run the test ___ times
-lenTest = 1
+lenTest = 5
 #list containng test execution time results
 arrTest = [0] * lenTest
 #average variable
@@ -244,7 +243,7 @@ for i in range(0, lenTest, 1):
       #s = SpCase(s,t)
       Tstart = time.time()
       #number of iterations (t, G, R, s, num)
-      grasp(t, G, R, s, 500)
+      grasp(t, G, R, s, 100)
       #print "The algorithm finish in %s seconds."%(time.time() - Tstart)
       arrTest[i] = time.time() - Tstart
 
@@ -254,14 +253,6 @@ sumTest = sum(arrTest)
 #averaging the results
 avgTest = sumTest / lenTest
 #print "mean:",avgTest
-
-#sd array
-variancea = []
-for a in arrTest:
-      #
-      variance=(avgTest- a)**2
-      variancea.append(variance)
-#print "SD Array: ",variancea
-msd =  (sum(variancea)/(lenTest-1))**(0.5)      
-print "Average time to complete ", lenTest, " algorithm runs: ", "Mean: ", avgTest, " seconds, SD: ", msd," seconds"
+    
+print "Average time to complete ", lenTest, " algorithm runs: ", "Mean: ", avgTest, " seconds"
 #print arrTest
