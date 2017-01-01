@@ -9,17 +9,10 @@ def create(n, min_d, max_d):
           stack.append(random.randrange(min_d,max_d,1))
       stack.sort(reverse=True)
       #create a random number for target
-      target = random.randrange(max_d*(len(str(max_d)))) 
+      target = random.randrange(1,(sum(range(1,max_d,1))/n),1)
+      
       # return the array and the target
       return stack, target
-
-######## not working #########
-def SpCase (array , target):
-      for a in array:
-            if a >= target:
-                  array.remove(a)
-      return array
-######## not working #########
 
 #greedy algorithm
 def greedy(target,array):
@@ -34,7 +27,7 @@ def greedy(target,array):
 
       #If there no element in greedy soution.
       if len(greedy_solution) == 0:
-            print "Greedy can be appply, because the target is too small"
+            print "Greedy can not be applied, because the target is too small"
       print "Greedy", greedy_solution, "=", sum(greedy_solution)
 
             
@@ -65,11 +58,13 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
       new = []
       #print "Solution: ", solution
       #print "Gsolution: ",Gsolution
+      print "Given array: ",array
       print "RCL" , RCL
       print "Target: ",target
       Gdiff = abs(t - sum(Gsolution))
       Sdiff = 0
       noc = 0
+      empty = 0
 
       
       while sum(solution) != target:
@@ -82,7 +77,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
             for a in solution: 
                   if a in slist:
                         slist.remove(a)
-            #remove the elment in the slist which is greter than the gup with the target            
+            #remove the element in the slist which is greter than the gup with the target            
             for b in slist:
                   if b > diff:
                         slist.remove(b)
@@ -91,6 +86,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                         slist.remove(a)
                   '''
             #print "\nSlist", slist
+            #print "\nArray", array
             #While total of solution is smaller than the target it will randomly select one more from RCL
             while sum(solution) < t :
             #if sum(solution) < t:
@@ -150,6 +146,11 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   best = list(new)
                   noc = 0
 
+            if len(solution) == 0:
+                  empty += 1
+            else:
+                  empty == 0
+
             if sum(best) == t:
                   print"done"
                   break
@@ -159,8 +160,8 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   print "There are no substring can be sum up to %s"%target
                   break
 
-            #when the best soltuion have not been update for for some time, it will break the while loop
-            elif noc == (maxt*0.1):
+            #when the best soltuion have not been update or there the solution have been empty for 10% of the maxmium iteration allowence, it will break the while loop
+            elif noc >= (maxt*0.1) or empty >= (maxt*0.1):
                   print "%s have been the best solution for %s time"%(best,noc)
                   print "There are no substring can be sum up to %s"%target
                   print "so we assume: "
@@ -171,6 +172,8 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   print "Over %s time of iteration, so we assume: " %iteration
                   solution = best
                   break
+
+
 
             #print "Time",iteration
 
@@ -200,10 +203,9 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
 #s = [7,8,2,5,6,4,9,13]
 #s.sort(reverse=True)
 #t = 377
-
 ####test variables####
 #length of test; run the test ___ times
-lenTest = 5
+lenTest = 1
 #list containng test execution time results
 arrTest = [0] * lenTest
 #average variable
@@ -214,25 +216,29 @@ sumTest = 0
 
 #test loop
 for i in range(0, lenTest, 1):
-    print "Test No.",i
-    #create(list length, element max size
-    c = create(20, 1, 101)
-    # array is the first element of the return value
-    s = c[0]
-    # target is the srcond element of the return value
-    t = c[1]
-    #s = SpCase(s,t)
-    G = greedy(t,s)
-    R = RCL(s, G)
-    Tstart = time.time()
-    #number of iterations (t, G, R, s, num)
-    grasp(t, G, R, s, 500)
-    #print "The algorithm finish in %s seconds."%(time.time() - Tstart)
-    arrTest[i] = time.time() - Tstart
+      print "\nTest No.",i
+      #create(list length, element max size
+      c = create(10, 1, 100)
+      # array is the first element of the return value
+      s = c[0]
+      #target is the srcond element of the return value
+      t = c[1]
+      #s = SpCase(s,t)
+      G = greedy(t,s)
+      R = RCL(s, G)
+      #s = SpCase(s,t)
+      Tstart = time.time()
+      #number of iterations (t, G, R, s, num)
+      grasp(t, G, R, s, 500)
+      #print "The algorithm finish in %s seconds."%(time.time() - Tstart)
+      arrTest[i] = time.time() - Tstart
 
+#print "result: ",arrTest
 #summing of results
 sumTest = sum(arrTest)
 #averaging the results
 avgTest = sumTest / lenTest
-print "Average time to complete ", lenTest, " algorithm runs: ", avgTest, " seconds"
+#print "mean:",avgTest    
+print "Average time to complete ", lenTest, " algorithm runs: ", "Mean: ", avgTest
 #print arrTest
+
