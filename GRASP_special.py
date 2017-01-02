@@ -267,15 +267,7 @@ sumTest = sum(arrTest)
 #averaging the results
 avgTest = sumTest / lenTest
 #print "mean:",avgTest
-
-#sd array
-variancea = []
-for a in arrTest:
-      #
-      variance=(avgTest- a)**2
-      variancea.append(variance)
-#print "SD Array: ",variancea
-msd =  (sum(variancea)/(lenTest-1))**(0.5)      
-print "Average time to complete ", lenTest, " algorithm runs: ", "Mean: ", avgTest, " seconds, SD: ", msd," seconds"
+     
+print "Average time to complete ", lenTest, " algorithm runs: ", "Mean: ", avgTest, " seconds"
 #print arrTest
 
