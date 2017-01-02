@@ -1,22 +1,37 @@
 import random
 import time
-
+'''
+In this program i have crate a array which at least have one elemment greater than the target
+'''
 #create a ramdom array 
 def create(n, min_d, max_d):
-      stack =[]
-      # n is the amount of element
-      for i in range (n):    
-          stack.append(random.randrange(min_d,max_d,1))
-      stack.sort(reverse=True)
+
+      #stack =[]
+      f = []
+      l = []
       #create a random number for target
-      target = random.randrange(sum(range(1,max_d,1))/n)
-      print "Ostack: ",stack
-      print " target: " ,target
+      r = random.randrange(n-1)
+      target = random.randrange(min_d,max_d,1)
+      print target
+      # n is the amount of element
+      for a in range (r):    
+          f.append(random.randrange(min_d,target,1))
+      if (n-r)== 0:
+            return
+      else:
+            for b in range (n-r):
+                  l.append(random.randrange(target,max_d,1))
+
+      stack = f+l
+      stack.sort(reverse=True)
+      #print "Ostack: ",stack
+      #print " target: " ,target
+      
+      #Run the special case
       stack = SpCase(stack,target)
       
       # return the array and the target
       return stack, target
-
 #####special Case########
 def SpCase (array , target):
       narray = []
@@ -172,7 +187,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
                   print "There are no substring can be sum up to %s"%target
                   break
 
-            #when the best soltuion have not been update for for some time, it will break the while loop
+            #when the best soltuion have not been update or there the solution have been empty for 10% of the maxmium iteration allowence, it will break the while loop
             elif noc >= (maxt*0.1) or empty >= (maxt*0.1):
                   print "%s have been the best solution for %s time"%(best,noc)
                   print "There are no substring can be sum up to %s"%target
@@ -218,7 +233,7 @@ def grasp(target, greedy_solution, RCL, array, Max_Iterations):
 
 ####test variables####
 #length of test; run the test ___ times
-lenTest = 5
+lenTest = 1
 #list containng test execution time results
 arrTest = [0] * lenTest
 #average variable
@@ -242,7 +257,7 @@ for i in range(0, lenTest, 1):
       #s = SpCase(s,t)
       Tstart = time.time()
       #number of iterations (t, G, R, s, num)
-      grasp(t, G, R, s, 100)
+      grasp(t, G, R, s, 500)
       #print "The algorithm finish in %s seconds."%(time.time() - Tstart)
       arrTest[i] = time.time() - Tstart
 
@@ -252,6 +267,15 @@ sumTest = sum(arrTest)
 #averaging the results
 avgTest = sumTest / lenTest
 #print "mean:",avgTest
-    
-print "Average time to complete ", lenTest, " algorithm runs: ", "Mean: ", avgTest, " seconds"
+
+#sd array
+variancea = []
+for a in arrTest:
+      #
+      variance=(avgTest- a)**2
+      variancea.append(variance)
+#print "SD Array: ",variancea
+msd =  (sum(variancea)/(lenTest-1))**(0.5)      
+print "Average time to complete ", lenTest, " algorithm runs: ", "Mean: ", avgTest, " seconds, SD: ", msd," seconds"
 #print arrTest
+
